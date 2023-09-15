@@ -1,0 +1,70 @@
+
+
+-----------------------------------------------------------------------------------------------------------------
+Get all the countries from Asia continent /region using Filter function
+
+ 
+    var res = result.filter(country => country.region ==='Asia');
+    console.log('Asia countries',res);
+}
+----------------------------------------------------------------------------------------------------------------
+Get all the countries with a population of less than 2 lakhs using Filter function
+
+
+var request = new XMLHttpRequest();
+request.open("GET", "https://restcountries.com/v3.1/all");
+request.send();
+request.onload = function(){
+    var result = JSON.parse(request.response);
+    console.log(result);
+    var res = result.filter(country => country.population<200000);
+    console.log('population',res);
+}
+---------------------------------------------------------------------------------------------------------------
+Print the total population of countries using reduce function
+
+var request = new XMLHttpRequest();
+request.open("GET", "https://restcountries.com/v3.1/all");
+request.send();
+request.onload = function(){
+    var result = JSON.parse(request.response);
+    console.log(result);
+    var res = result.reduce((acc,country)=> acc + country.population, 0);
+    console.log('Total Population',res);
+}
+--------------------------------------------------------------------------------------------------------------------
+Print the following details name, capital, flag using forEach function
+
+
+var request = new XMLHttpRequest();
+request.open("GET", "https://restcountries.com/v3.1/all");
+request.send();
+request.onload = function() {
+    var result = JSON.parse(request.response);
+    console.log(result);
+    result.forEach(country => {
+      console.log("Name",country.name.common);
+      console.log("Capital",country.capital);
+      console.log("Flag",country.flags.svg);
+    });
+};\
+----------------------------------------------------------------------------------------------------------------------
+Print the country which uses US Dollars as currency.
+
+
+var request = new XMLHttpRequest();
+      request.open("GET", "https://restcountries.com/v3.1/all");
+      request.send();
+      request.onload = function() {
+        if (request.status === 200) {
+          console.log(request.responseText);
+          var countrydetails = JSON.parse(request.responseText);
+          for (var i = 0; i < countrydetails.length; i++) {
+            console.log(countrydetails[i].currency === "$");
+          }
+        } else {
+          console.log("Request failed", request.status);
+        }
+      };
+
+-----------------------------------------------------------------------------------------------------------------------------
